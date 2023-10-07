@@ -1,11 +1,12 @@
-using BuberBreakfast.Contracts.Breakfast;
+using BuberBreakfast.Models;
 
-namespace BuberBreakfast.Services.Breakfasts;
-
-public interface IBreakfastService
+namespace BuberBreakfast.Services.Breakfasts
 {
-  Task<BreakfastResponse> CreateBreakfastAsync(CreateBreakfastRequest request);
-  Task<BreakfastResponse> GetBreakfastAsync(Guid id);
-  Task<BreakfastResponse> UpsertBreakfastAsync(Guid id, UpsertBreakfastRequest request);
-  Task DeleteBreakfastAsync(Guid id);
+  public interface IBreakfastService
+  {
+    void CreateBreakfast(Breakfast breakfast);
+        void DeleteBreakfast(Guid id);
+        Breakfast  GetBreakFast(Guid id);
+        void UpsertBreakfast(Breakfast breakfast);
+    }
 }
