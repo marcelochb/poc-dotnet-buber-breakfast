@@ -1,12 +1,13 @@
 using BuberBreakfast.Contracts.Breakfast;
 using BuberBreakfast.Models;
 using BuberBreakfast.Services.Breakfasts;
+using BuberBreakfast.ServicesErrors;
+using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuberBreakfast.Controllers;
-[ApiController]
-[Route("[controller]")]
-public class BreakfastsController : ControllerBase
+
+public class BreakfastsController : ApiController
 {
   private readonly IBreakfastService _breakfastService;
 
@@ -45,19 +46,27 @@ public class BreakfastsController : ControllerBase
   }
   [HttpGet("{id:guid}")]
   public IActionResult GetBreakfast(Guid id)
-  {
-    Breakfast breakfast = _breakfastService.GetBreakFast(id);
-    var response = new BreakfastResponse(breakfast.Id,
-                                         breakfast.Name,
-                                         breakfast.Description,
-                                         breakfast.StartDateTime,
-                                         breakfast.EndDateTime,
-                                         breakfast.LastModifiedDateTime,
-                                         breakfast.Savory,
-                                         breakfast.Sweet);  
-    return Ok(response);
-  }
-  [HttpPut("{id:guid}")]
+    {
+        ErrorOr<Breakfast> getBreakfastResult = _breakfastService.GetBreakFast(id);
+
+        return getBreakfastResult.Match(
+            breakfast => Ok(MapBreakfastResponse(breakfast)),
+            errors => Problem(errors));
+    }
+
+    private static BreakfastResponse MapBreakfastResponse(Breakfast breakfast)
+    {
+        return new BreakfastResponse(breakfast.Id,
+                                             breakfast.Name,
+                                             breakfast.Description,
+                                             breakfast.StartDateTime,
+                                             breakfast.EndDateTime,
+                                             breakfast.LastModifiedDateTime,
+                                             breakfast.Savory,
+                                             breakfast.Sweet);
+    }
+
+    [HttpPut("{id:guid}")]
   public IActionResult UpsertBreakfast(Guid id, UpsertBreakfastRequest request)
   {
     var breakfast = new Breakfast(

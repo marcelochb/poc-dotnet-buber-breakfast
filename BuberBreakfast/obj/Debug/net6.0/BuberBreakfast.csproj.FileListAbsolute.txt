@@ -22,3 +22,4 @@
 /Users/60003580/Developer/BuberBreakfast/BuberBreakfast/obj/Debug/net6.0/BuberBreakfast.pdb
 /Users/60003580/Developer/BuberBreakfast/BuberBreakfast/obj/Debug/net6.0/BuberBreakfast.genruntimeconfig.cache
 /Users/60003580/Developer/BuberBreakfast/BuberBreakfast/obj/Debug/net6.0/ref/BuberBreakfast.dll
+/Users/60003580/Developer/BuberBreakfast/BuberBreakfast/bin/Debug/net6.0/ErrorOr.dll
