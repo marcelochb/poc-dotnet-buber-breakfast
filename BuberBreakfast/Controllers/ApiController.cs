@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BuberBreakfast.Controllers;
 [ApiController]
-[Route("[controller]")]
+[Route("/")]
 public class ApiController: ControllerBase
 {
   protected IActionResult Problem(List<Error> errors) {
