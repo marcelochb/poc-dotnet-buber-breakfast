@@ -1,5 +1,5 @@
-@id=83dbfd16-7871-42e9-8ec6-e112c08b8fd5
-PUT http://localhost:5155/breakfasts/{{id}}
+@id=c8934417-cf7f-4729-9237-7e0a5862a5de
+PUT https://buberbreakfast.azurewebsites.net/{{id}}
 Content-Type: application/json
 
 {
